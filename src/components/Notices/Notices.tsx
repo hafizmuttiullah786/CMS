@@ -14,9 +14,10 @@ type Notification = {
 
 type Props = {
   notification: Notification[];
+  addNotification: (data: Notification) => Promise<void>
 };
 
-const Notices = ({ notification }: Props) => {
+const Notices = ({ notification,addNotification }: Props) => {
   const [show, setShow] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState<Notification | null>(null);
   const [notificationList, setNotificationList] = useState<Notification[]>([]);
@@ -69,7 +70,8 @@ const Notices = ({ notification }: Props) => {
       description: newNotice.description,
       date: newNotice.date.toISOString(),
     };
-    setNotificationList((prev) => [...prev, newNoticeEntry]);
+    addNotification(newNoticeEntry)
+    // setNotificationList((prev) => [...prev, newNoticeEntry]);
     setShowCreateModal(false);
     setNewNotice({ title: "", description: "", date: new Date() });
   };

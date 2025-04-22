@@ -11,16 +11,23 @@ import Notices from "@/components/Notices/Notices";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
+
+type Notification = {
+  title: string;
+  description: string;
+  date: string;
+};
 type Props={
   dashboardStats: any
   notification: any
+  addNotification: (data: Notification) => Promise<void>
 }
 const ECommerce = (props:Props) => {
   return (
     <>
       <DataStatsOne dashboardStats={props.dashboardStats} />
       <div className="mt-4">
-        <Notices  notification={props.notification}/>
+        <Notices  notification={props.notification} addNotification={props.addNotification}/>
       </div>
     </>
   );

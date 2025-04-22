@@ -3,11 +3,18 @@ import ECommerce from "@/components/Dashboard/E-commerce";
 import ApiNames from "@/constants/ApiNames";
 import { fetchGet } from "@/Services/NetWorkServices";
 import {
+  addDashboardNotifications,
   getDashboardNotifications,
   getDashboardStats,
 } from "@/Services/UserApplicationService";
 import { Metadata } from "next";
 import React, { useEffect, useState } from "react";
+
+type Notification = {
+  title: string;
+  description: string;
+  date: string;
+};
 
 export default function Home() {
   const [dashboardStats, setDashboardStats] = useState<any>(null);
@@ -113,11 +120,27 @@ export default function Home() {
     }
   };
 
+  const addNotification = async (data:Notification) => {
+    try {
+   
+      // let response = await addDashboardNotifications(ApiNames.notification,data);
+
+      let response = {
+        statusCode: 200}
+      if (response.statusCode == 200) {
+        getNotification()
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+    } finally {
+    }
+  };
+
 
 
   return (
     <>
-      <ECommerce dashboardStats={dashboardStats} notification={notification}/>
+      <ECommerce dashboardStats={dashboardStats} notification={notification} addNotification={addNotification}/>
     </>
   );
 }
