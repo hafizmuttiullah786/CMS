@@ -482,10 +482,18 @@ input[type="number"] {
   justify-content: space-between;
 }
 .stats-wrapper .stats-box .stats-icon {
+  background-color: rgb(87 80 241 / 0.07);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .stats-wrapper .stats-box .stats-icon i {
-  font-size: 28px;
-  color: #fff;
+  font-size: 40px;
+  color: #0d6efd;
 }
 .stats-wrapper .stats-box {
   padding: 20px 15px;
@@ -493,56 +501,24 @@ input[type="number"] {
   width: 24%;
   border-radius: 12px;
   box-shadow: 0 3px 10px #0003;
-  background: linear-gradient(to right, #9181f4, #5038ed);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: relative;
   cursor: pointer;
+  background: #fff;
 }
 
-.stats-wrapper .stats-box::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -100%;
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.5) 30%,
-    rgba(255, 255, 255, 0) 80%
-  );
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(1.3);
-  opacity: 0;
-}
-
-.stats-wrapper .stats-box:hover::after {
-  animation: shine-move 0.8s ease-in-out forwards;
-  opacity: 1;
-}
-
-@keyframes shine-move {
-  0% {
-    left: -100%;
-    opacity: 1;
-  }
-  100% {
-    left: 150%;
-    opacity: 0;
-  }
-}
 .stats-wrapper .stats-box h3 {
-  font-size: 16px;
+  font-size: 28px;
   font-weight: 600;
-  color: #fff;
+  color: #000;
   margin-top: 3px;
+  text-align: center;
 }
 .stats-wrapper .stats-box .total_applications {
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
+  font-size: 17px;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+  margin: 10px 0px;
 }
 body {
   background-color: rgb(243, 244, 246, 1) !important;
@@ -572,7 +548,7 @@ ul {
 }
 
 .notice_wrapper {
-  padding: 20px;
+  padding: 20px 20px 0px;
   border-radius: 10px;
 }
 
@@ -607,6 +583,27 @@ button.view-all span i {
   border-spacing: 0 10px; /* 0 for left/right, 10px for bottom spacing */
   table-layout: fixed;
 }
+.table-fixed-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #fff;
+  margin-top: 10px;
+}
+.table-fixed-head h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 0px;
+}
+.notices-table {
+  height: calc(100vh - 450px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.notices-table::-webkit-scrollbar {
+  display: none;
+}
 .notices-table th,
 .notices-table td {
   padding: 12px;
@@ -630,8 +627,6 @@ button.view-all span i {
   text-align: right;
 }
 .notices-table tbody tr:hover {
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  transform: scale(1.02);
   background-color: rgb(87 80 241 / 0.07);
   transition: all 0.3s ease-in;
 }
@@ -639,6 +634,7 @@ button.view-all span i {
   color: #5038ed;
   font-size: 22px;
   cursor: pointer;
+  margin-right: 30px;
 }
 .no-data-found {
   margin-top: 20px;
@@ -651,32 +647,28 @@ button.view-all span i {
 }
 .notices_modal .modal-header {
   justify-content: center;
+  position: relative;
+}
+.modal-header {
+  position: relative;
 }
 .notices_modal .modal-title {
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 700;
+  text-transform: capitalize;
   text-align: center;
 }
 .close_btn {
-  position: absolute;
-  right: -38px;
-  top: -5px;
-  transition: 0.3s linear;
   cursor: pointer;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.close_btn:hover {
-  background: linear-gradient(to right, #9181f4, #5038ed);
 }
 .close_btn i {
-  color: #fff;
-  font-size: 22px;
+  color: #d9d9d9;
+  font-size: 35px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 300;
 }
 .select-courses {
 }
@@ -684,9 +676,9 @@ button.view-all span i {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 30px;
-  background-color: rgb(87 80 241 / 0.07);
   padding: 30px 20px;
   margin-top: 30px;
+  background-color: #fff;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 .select-courses .search-wrapper .select_box .select_field {
@@ -716,10 +708,6 @@ button.view-all span i {
 .university_list_top .select_uni .css-13cymwt-control,
 .select-courses .search-wrapper .select_box .search_input input,
 .select-courses .search-wrapper .select_box .select_field .css-13cymwt-control {
-  border-top: 0.7px solid rgb(91, 91, 152, 0.7);
-  border-bottom: 0.7px solid rgb(91, 91, 152, 0.7);
-  border-left: unset;
-  border-right: unset;
   padding: 2px 0px;
   text-transform: capitalize;
   font-size: 16px;
@@ -727,15 +715,17 @@ button.view-all span i {
   font-weight: 400;
   background-color: transparent;
   cursor: pointer;
+  border: 1px solid #5b5b98;
+  border-radius: 2px;
 }
 .select-courses
   .search-wrapper
   .select_box
   .search_input
   input::-moz-placeholder {
-  font-size: 15px !important;
+  font-size: 14px !important;
   color: #5b5b98 !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
 }
 .select-courses
   .search-wrapper
@@ -744,9 +734,9 @@ button.view-all span i {
   .css-1jqq78o-placeholder,
 .select-courses .search-wrapper .select_box .select_field .css-qbdosj-Input,
 .select-courses .search-wrapper .select_box .search_input input::placeholder {
-  font-size: 15px !important;
+  font-size: 14px !important;
   color: #5b5b98 !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
 }
 .select-courses
   .search-wrapper
@@ -775,7 +765,6 @@ button.view-all span i {
   margin-top: 60px;
 }
 .course_wrapper .course_Card {
-  padding: 20px;
   max-width: 96%;
   width: 100%;
   border-radius: 14px;
@@ -785,8 +774,8 @@ button.view-all span i {
 }
 .course_wrapper .course_Card .uni_logo img {
   position: absolute;
-  right: -25px;
-  top: 20%;
+  left: 30px;
+  bottom: -25px;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -795,30 +784,27 @@ button.view-all span i {
 .course_wrapper .course_img {
   width: 100%;
   object-fit: cover;
+  position: relative;
 }
 .course_wrapper .course_img img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin: auto;
-  display: block;
 }
 .course_detail {
-  padding: 15px 0px 0px;
+  padding: 35px 20px 20px;
 }
 .course-name {
   color: rgb(75, 85, 99, 1);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  text-align: center;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .uni-name {
   color: rgb(75, 85, 99, 1);
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 500;
   margin-top: 5px;
-  text-align: center;
 }
 .course-inner-detail {
   margin: 20px 0px;
@@ -832,7 +818,7 @@ button.view-all span i {
 }
 .inner-flex p {
   color: rgb(75, 85, 99, 1);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
 }
 .inner-flex span {
@@ -876,6 +862,21 @@ button.apply-now-button:hover {
   font-weight: 600;
   margin-bottom: 5px;
   color: rgb(75, 85, 99, 1);
+}
+label {
+  display: block !important;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+.btn.btn-success {
+  margin-left: auto;
+  display: block;
+}
+.modal-title.h4 {
+  font-size: 20px;
+}
+.react-datepicker-wrapper {
+  width: 100%;
 }
 .apply-courses .css-13cymwt-control {
   border: unset;
@@ -931,9 +932,9 @@ button.apply-now-button:hover {
 .course_pagination {
   border-radius: 55px;
   box-shadow: 0px 3px 10px #0003;
-  padding: 10px 25px !important;
+  padding: 10px 40px !important;
   width: 100%;
-  max-width: 60%;
+  max-width: fit-content;
   margin: 50px auto 0px;
   background-color: #fff;
 }
@@ -979,54 +980,72 @@ button.apply-now-button:hover {
   border-radius: 16px;
   background-color: #fff;
   transition: 0.3s linear;
-  cursor: pointer;
 }
-.university_list .university_card:hover {
-  background-color: rgb(87 80 241 / 0.07);
-}
+
 .university_list .uni_icon img {
-  border-radius: 50%;
   width: 45px;
   height: 45px;
   object-fit: cover;
 }
 .university_list_top {
   padding: 40px 20px;
-  background-color: rgb(87 80 241 / 0.07);
   margin: 20px 0px 40px;
   border-radius: 18px;
   box-shadow: 0px 1px 2px #0003;
+  background-color: #fff;
 }
 .university_list_top .select_uni .css-b62m3t-container {
   background: transparent;
   width: 100%;
-  max-width: 41%;
 }
 .css-1jqq78o-placeholder,
 .university_list_top .select_uni .css-1xc3v61-indicatorContainer {
   color: #5b5b98 !important;
   font-weight: 600;
 }
-.university_list_top .form-control{
-  border: unset;
+
+.university_list_top .css-13cymwt-control,
+.university_list_top .form-control {
+  background-color: unset !important;
+  border: unset !important;
 }
-.university_list .uni_icon img{
-  margin: -32.5px auto 0px; 
+.university_list_top .css-13cymwt-control
+{
+  border: 1px solid #5b5b98 !important;
 }
-.university_list .short-title{
-  margin-top: 10px;
+.university_list .uni_icon img {
 }
-.university_list .short-title p{
-  text-align: center;
+.uniname-logo-flex {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.university_list .short-title {
+}
+.university_list .short-title p {
   color: #687279;
   font-size: 14px;
   font-weight: 400;
 }
-.university_list .short-title span{
+.university_list .short-title span {
   display: block;
-  text-align: center;
   font-size: 16px;
   font-weight: 500;
   color: #5b5b98;
+}
+.city-country-flex {
+  display: flex;
+  justify-content: space-between;
+}
+.city-country-flex .short-title p {
+  margin-bottom: 7px !important;
+}
+.edit__btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px;
+  background-color: #ececec;
 }
 /* my styling   ends*/

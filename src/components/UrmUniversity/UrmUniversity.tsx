@@ -7,7 +7,7 @@ import Select from "react-select";
 import { Modal, Button, Form } from "react-bootstrap";
 
 // const isAdmin = typeof window !== "undefined" && localStorage.getItem("role") === "admin";
-const isAdmin=true
+const isAdmin = true;
 type Props = {
   universitiesData: any;
 };
@@ -30,7 +30,7 @@ const UrmUniversity = ({ universitiesData }: Props) => {
 
   const countryOptions = useMemo(() => {
     const uniqueCountries = Array.from(
-      new Set(universitiesData?.universities.map((uni: any) => uni.country))
+      new Set(universitiesData?.universities.map((uni: any) => uni.country)),
     ) as string[];
 
     return uniqueCountries.map((country: string) => ({
@@ -44,13 +44,13 @@ const UrmUniversity = ({ universitiesData }: Props) => {
 
     if (selectedUniversity) {
       filtered = filtered.filter(
-        (uni: any) => uni.id === selectedUniversity.value
+        (uni: any) => uni.id === selectedUniversity.value,
       );
     }
 
     if (selectedCountry) {
       filtered = filtered.filter(
-        (uni: any) => uni.country === selectedCountry.value
+        (uni: any) => uni.country === selectedCountry.value,
       );
     }
 
@@ -109,7 +109,7 @@ const UrmUniversity = ({ universitiesData }: Props) => {
   return (
     <div className="university_list">
       <div className="page-heading d-flex justify-content-between align-items-center">
-        <span>URM University</span>
+        <span className="page-heading">URM University</span>
         {isAdmin && (
           <Button variant="primary" onClick={() => openModal()}>
             Add University
@@ -117,7 +117,7 @@ const UrmUniversity = ({ universitiesData }: Props) => {
         )}
       </div>
 
-      <div className="university_list_top mb-4 d-flex gap-3 flex-wrap">
+      <div className="university_list_top d-flex mb-4 flex-wrap gap-3">
         <div className="select_uni" style={{ minWidth: "250px" }}>
           <Select
             id="universitySelect"
@@ -150,26 +150,31 @@ const UrmUniversity = ({ universitiesData }: Props) => {
               {isAdmin && (
                 <button
                   onClick={() => openModal(uni)}
-                  className="btn btn-sm btn-light position-absolute top-0 end-0 m-2"
+                  className="edit__btn"
                 >
                   ✏️
                 </button>
               )}
-              <div className="uni_icon mb-2">
-                <Image src={uniicon} alt="icon" />
+              <div className="uniname-logo-flex">
+                <div className="uni_icon">
+                  <Image src={uniicon} alt="icon" />
+                </div>
+                <div className="short-title">
+                  <p>University Name</p>
+                  <span>{uni.universityName}</span>
+                </div>
               </div>
-              <div className="short-title">
-                <p>University Name</p>
-                <span>{uni.universityName}</span>
+              <div className="city-country-flex">
+                <div className="short-title">
+                  <p>City</p>
+                  <span>{uni.city}</span>
+                </div>
+                <div className="short-title">
+                  <p>Country</p>
+                  <span>{uni.country}</span>
+                </div>
               </div>
-              <div className="short-title">
-                <p>City</p>
-                <span>{uni.city}</span>
-              </div>
-              <div className="short-title">
-                <p>Country</p>
-                <span>{uni.country}</span>
-              </div>
+
               {/* <div className="short-title">
                 <p>Address</p>
                 <span>{uni.address}</span>
@@ -232,32 +237,46 @@ const UrmUniversity = ({ universitiesData }: Props) => {
           <Form>
             <Form.Group className="mb-3">
               <Form.Label>University Name</Form.Label>
-              <Form.Control defaultValue={editData?.universityName || ""} placeholder="Enter university name" />
+              <Form.Control
+                defaultValue={editData?.universityName || ""}
+                placeholder="Enter university name"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>City</Form.Label>
-              <Form.Control defaultValue={editData?.city || ""} placeholder="Enter city" />
+              <Form.Control
+                defaultValue={editData?.city || ""}
+                placeholder="Enter city"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Country</Form.Label>
-              <Form.Control defaultValue={editData?.country || ""} placeholder="Enter country" />
+              <Form.Control
+                defaultValue={editData?.country || ""}
+                placeholder="Enter country"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Address</Form.Label>
-              <Form.Control defaultValue={editData?.address || ""} placeholder="Enter address" />
+              <Form.Control
+                defaultValue={editData?.address || ""}
+                placeholder="Enter address"
+              />
             </Form.Group>
 
             <Form.Label>Intakes</Form.Label>
             {intakes.map((intake, index) => (
-              <div key={index} className="mb-3 p-3 border rounded">
+              <div key={index} className="mb-3 rounded border p-3">
                 <Form.Group className="mb-2">
                   <Form.Label>Term</Form.Label>
                   <Form.Control
                     value={intake.term}
-                    onChange={(e) => handleIntakeChange(index, "term", e.target.value)}
+                    onChange={(e) =>
+                      handleIntakeChange(index, "term", e.target.value)
+                    }
                     placeholder="e.g., Fall 2024"
                   />
                 </Form.Group>
@@ -266,7 +285,9 @@ const UrmUniversity = ({ universitiesData }: Props) => {
                   <Form.Control
                     type="date"
                     value={intake.startDate}
-                    onChange={(e) => handleIntakeChange(index, "startDate", e.target.value)}
+                    onChange={(e) =>
+                      handleIntakeChange(index, "startDate", e.target.value)
+                    }
                   />
                 </Form.Group>
                 <Form.Group>
@@ -274,11 +295,17 @@ const UrmUniversity = ({ universitiesData }: Props) => {
                   <Form.Control
                     type="date"
                     value={intake.endDate}
-                    onChange={(e) => handleIntakeChange(index, "endDate", e.target.value)}
+                    onChange={(e) =>
+                      handleIntakeChange(index, "endDate", e.target.value)
+                    }
                   />
                 </Form.Group>
                 {intakes.length > 1 && (
-                  <Button variant="danger" className="mt-2" onClick={() => removeIntake(index)}>
+                  <Button
+                    variant="danger"
+                    className="mt-2"
+                    onClick={() => removeIntake(index)}
+                  >
                     Remove Intake
                   </Button>
                 )}

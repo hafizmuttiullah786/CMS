@@ -88,12 +88,56 @@ const SearchCourses = ({ courseData }: Props) => {
       <div className="page-heading">Course ({filteredCourses.length})</div>
 
       <div className="search-wrapper">
-     
-        <div className="select_box"><Select isClearable className="select_field"  placeholder="University Country" options={countryOptions} value={country} onChange={setCountry} /></div>
-        <div className="select_box"><Select isClearable className="select_field"  placeholder="Student Nationality"  options={nationalityOptions} value={nationality} onChange={setNationality} /></div>
-        <div className="select_box"><Select isClearable className="select_field"  placeholder="University Name"  options={universityOptions} value={university} onChange={setUniversity} /></div>
-        <div className="select_box"><Select isClearable className="select_field"  placeholder="Course Type"  options={courseTypeOptions} value={courseType} onChange={setCourseType} /></div>
-        <div className="select_box"><Select isClearable className="select_field"  placeholder="Course Intake"  options={intakeOptions} value={intake} onChange={setIntake} /></div>
+        <div className="select_box">
+          <Select
+            isClearable
+            className="select_field"
+            placeholder="University Country"
+            options={countryOptions}
+            value={country}
+            onChange={setCountry}
+          />
+        </div>
+        <div className="select_box">
+          <Select
+            isClearable
+            className="select_field"
+            placeholder="Student Nationality"
+            options={nationalityOptions}
+            value={nationality}
+            onChange={setNationality}
+          />
+        </div>
+        <div className="select_box">
+          <Select
+            isClearable
+            className="select_field"
+            placeholder="University Name"
+            options={universityOptions}
+            value={university}
+            onChange={setUniversity}
+          />
+        </div>
+        <div className="select_box">
+          <Select
+            isClearable
+            className="select_field"
+            placeholder="Course Type"
+            options={courseTypeOptions}
+            value={courseType}
+            onChange={setCourseType}
+          />
+        </div>
+        <div className="select_box">
+          <Select
+            isClearable
+            className="select_field"
+            placeholder="Course Intake"
+            options={intakeOptions}
+            value={intake}
+            onChange={setIntake}
+          />
+        </div>
         <div className="select_box">
           <div className="search_input">
             <i className="ri-search-line"></i>
@@ -116,11 +160,11 @@ const SearchCourses = ({ courseData }: Props) => {
         ) : (
           currentCourses.map((course: any, index: number) => (
             <div className="course_Card" key={index}>
-              <div className="uni_logo">
-                <Image src={unilogo} alt="University Logo" />
-              </div>
               <div className="course_img">
                 <Image src={Leadsbeckettbanner} alt="Course Banner" />
+                <div className="uni_logo">
+                  <Image src={unilogo} alt="University Logo" />
+                </div>
               </div>
               <div className="course_detail">
                 <div className="course-name">{course.courseTitle}</div>
@@ -132,15 +176,21 @@ const SearchCourses = ({ courseData }: Props) => {
                   </div>
                   <div className="inner-flex">
                     <p>Tuition Fee:</p>
-                    <span>{course.tuitionFee} {course.currency}</span>
+                    <span>
+                      {course.tuitionFee} {course.currency}
+                    </span>
                   </div>
                   <div className="inner-flex">
                     <p>Application Fee:</p>
-                    <span>{course.applicationFee} {course.currency}</span>
+                    <span>
+                      {course.applicationFee} {course.currency}
+                    </span>
                   </div>
                   <div className="inner-flex">
                     <p>Duration:</p>
-                    <span>{course.duration} {course.durationUnit}</span>
+                    <span>
+                      {course.duration} {course.durationUnit}
+                    </span>
                   </div>
                 </div>
                 <button className="apply-now-button">Apply Now</button>
@@ -153,11 +203,29 @@ const SearchCourses = ({ courseData }: Props) => {
       {filteredCourses.length > 0 && (
         <div className="course_pagination">
           <div className="pagination-wraper">
-            <button className="prev" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Prev</button>
+            <button
+              className="prev"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Prev
+            </button>
             {[...Array(totalPages)].map((_, idx) => (
-              <button key={idx + 1} className={currentPage === idx + 1 ? "active" : ""} onClick={() => handlePageChange(idx + 1)}>{idx + 1}</button>
+              <button
+                key={idx + 1}
+                className={currentPage === idx + 1 ? "active" : ""}
+                onClick={() => handlePageChange(idx + 1)}
+              >
+                {idx + 1}
+              </button>
             ))}
-            <button className="next" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
+            <button
+              className="next"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
           </div>
         </div>
       )}

@@ -14,12 +14,13 @@ type Notification = {
 
 type Props = {
   notification: Notification[];
-  addNotification: (data: Notification) => Promise<void>
+  addNotification: (data: Notification) => Promise<void>;
 };
 
-const Notices = ({ notification,addNotification }: Props) => {
+const Notices = ({ notification, addNotification }: Props) => {
   const [show, setShow] = useState(false);
-  const [selectedNotification, setSelectedNotification] = useState<Notification | null>(null);
+  const [selectedNotification, setSelectedNotification] =
+    useState<Notification | null>(null);
   const [notificationList, setNotificationList] = useState<Notification[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -35,14 +36,14 @@ const Notices = ({ notification,addNotification }: Props) => {
       const role = localStorage.getItem("role");
       if (role === "admin") {
         setIsAdmin(true);
-      }else{
+      } else {
         setIsAdmin(true);
       }
     }
   }, []);
 
   useEffect(() => {
-    setNotificationList(notification)
+    setNotificationList(notification);
   }, [notification]);
 
   const handleClose = () => {
@@ -70,7 +71,7 @@ const Notices = ({ notification,addNotification }: Props) => {
       description: newNotice.description,
       date: newNotice.date.toISOString(),
     };
-    addNotification(newNoticeEntry)
+    addNotification(newNoticeEntry);
     // setNotificationList((prev) => [...prev, newNoticeEntry]);
     setShowCreateModal(false);
     setNewNotice({ title: "", description: "", date: new Date() });
@@ -79,25 +80,35 @@ const Notices = ({ notification,addNotification }: Props) => {
   return (
     <>
       {/* View Notice Modal */}
-      <Modal show={show} onHide={handleClose} centered size="lg" className="notices_modal">
-        <div className="close_btn" onClick={handleClose}>
-          <i className="ri-close-line"></i>
-        </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        centered
+        className="notices_modal"
+      >
         <Modal.Header>
           <Modal.Title>{selectedNotification?.title}</Modal.Title>
+          <div className="close_btn" onClick={handleClose}>
+            <i className="ri-close-line"></i>
+          </div>
         </Modal.Header>
         <Modal.Body>
-          <Image src={deposit} alt="deposit" />
-          <p style={{ marginTop: "15px" }}>{selectedNotification?.description}</p>
+          <p style={{ marginTop: "15px" }}>
+            {selectedNotification?.description}
+          </p>
         </Modal.Body>
       </Modal>
 
       {/* Create Notice Modal */}
-      <Modal show={showCreateModal} onHide={() => setShowCreateModal(false)} centered>
-        <div className="close_btn" onClick={() => setShowCreateModal(false)}>
-          <i className="ri-close-line"></i>
-        </div>
+      <Modal
+        show={showCreateModal}
+        onHide={() => setShowCreateModal(false)}
+        centered
+      >
         <Modal.Header>
+          <div className="close_btn" onClick={() => setShowCreateModal(false)}>
+            <i className="ri-close-line"></i>
+          </div>
           <Modal.Title>Create New Notice</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -107,7 +118,9 @@ const Notices = ({ notification,addNotification }: Props) => {
               type="text"
               className="form-control"
               value={newNotice.title}
-              onChange={(e) => setNewNotice({ ...newNotice, title: e.target.value })}
+              onChange={(e) =>
+                setNewNotice({ ...newNotice, title: e.target.value })
+              }
             />
           </div>
           <div className="form-group" style={{ marginTop: 10 }}>
@@ -115,7 +128,9 @@ const Notices = ({ notification,addNotification }: Props) => {
             <textarea
               className="form-control"
               value={newNotice.description}
-              onChange={(e) => setNewNotice({ ...newNotice, description: e.target.value })}
+              onChange={(e) =>
+                setNewNotice({ ...newNotice, description: e.target.value })
+              }
             />
           </div>
           <div className="form-group" style={{ marginTop: 10 }}>
@@ -131,7 +146,11 @@ const Notices = ({ notification,addNotification }: Props) => {
               dateFormat="yyyy-MM-dd"
             />
           </div>
-          <Button variant="success" style={{ marginTop: 15 }} onClick={handleCreateNotice}>
+          <Button
+            variant="success"
+            style={{ marginTop: 15 }}
+            onClick={handleCreateNotice}
+          >
             Submit
           </Button>
         </Modal.Body>
@@ -142,29 +161,50 @@ const Notices = ({ notification,addNotification }: Props) => {
         <div className="row">
           <div className="col-lg-12 col-md-12 col-12">
             <div className="notices_section">
-              <div className="notices-top" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div
+                className="notices-top"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <div className="page-heading">Important Notices</div>
                 {isAdmin && (
-                  <Button variant="primary" onClick={() => setShowCreateModal(true)}>
+                  <Button
+                    variant="primary"
+                    onClick={() => setShowCreateModal(true)}
+                  >
                     Add Notice
                   </Button>
                 )}
               </div>
+              <div className="table-fixed-head">
+                <h3>Title</h3>
+                <h3>Date</h3>
+              </div>
               <div className="notices-table">
                 <table>
-                  <thead>
+                  {/* <thead>
                     <tr>
                       <th>Title</th>
                       <th>Date</th>
                     </tr>
-                  </thead>
+                  </thead> */}
                   <tbody>
                     {notificationList?.length > 0 ? (
                       notificationList.map((item, index) => (
                         <tr key={index}>
                           <td>{item.title}</td>
                           <td>
-                            <p onClick={() => handleShow(item)} style={{ cursor: "pointer", display: "inline-block", marginRight: 8 }}>
+                            <p
+                              onClick={() => handleShow(item)}
+                              style={{
+                                cursor: "pointer",
+                                display: "block",
+                                marginRight: 8,
+                              }}
+                            >
                               <i className="ri-eye-line"></i>
                             </p>
                             {formatDate(item.date)}
@@ -173,7 +213,9 @@ const Notices = ({ notification,addNotification }: Props) => {
                       ))
                     ) : (
                       <tr>
-                        <td colSpan={2} style={{ textAlign: "center" }}>No data found</td>
+                        <td colSpan={2} style={{ textAlign: "center" }}>
+                          No data found
+                        </td>
                       </tr>
                     )}
                   </tbody>
